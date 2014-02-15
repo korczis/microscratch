@@ -1,0 +1,81 @@
+$color-01: #ecf0f1;
+$color-02: #c0392b;
+$color-03: #34495e;
+$color-04: #7f8c8d;
+$break-small: 650px;
+
+body {
+  background-color: $color-01;
+  color: $color-02;
+  font-size: 22px;
+  font-weight: 300;
+}
+
+a {
+  color: $color-02;
+  &:hover, &:active {
+    color: $color-02;
+  }
+}
+
+.intro {
+  h1 {
+    color: $color-02;
+    font-size: 3em;
+    margin: 1.5em 0 0.5em 0;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+
+    @media screen and (max-width: $break-small) {
+      font-size: 1.4em;
+    }
+  }
+
+  p {
+    font-style: italic;
+    font-size: 1.5em;
+    color: transparentize($color-02, 0.15);
+
+    @media screen and (max-width: $break-small) {
+      font-size: 1.2em;
+    }
+  }
+}
+
+.action-area {
+  padding: 1.5em 0;
+  text-align: center;
+  margin: 2em 0 1em 0;
+  background-color: transparentize($color-04, 0.75);
+  border-radius: 4px;
+
+}
+
+.instructions {
+  padding: 0.5em;
+
+  h3 {
+    font-weight: 300;
+    color: #2c3e50;
+
+    text-transform: uppercase;
+    font-size: 0.9em;
+  }
+
+  .or {
+    text-align: center;
+    line-height: 1.6em;
+    margin: 0;
+    padding: 0;
+  }
+
+}
+
+.footer {
+  color: $color-04;
+  border-top: 1px solid $color-04;
+  font-size: 0.8em;
+  padding: 0.5em 0;
+  margin: 1em 0;
+}
