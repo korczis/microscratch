@@ -19,7 +19,19 @@
 // THE SOFTWARE.
 
 (function (global) {
-    define(["config", "jquery", "bootstrap", "handlebars", "ember", "ember-data", "socketio", "google-analytics", "exports"], function (config, $, bootstrap, handlebars, Ember, data, io, ga, exports) {
+    var deps = [
+        "config",
+        "jquery",
+        "bootstrap",
+        "handlebars",
+        "ember",
+        "ember-data",
+        "socketio",
+        "google-analytics",
+        "exports"
+    ];
+    
+    define(deps, function (config, $, bootstrap, handlebars, Ember, data, io, ga, exports) {
         var App = window.App = Ember.Application.create({
             options: {},
 
