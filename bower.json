@@ -30,7 +30,7 @@
     "moment": "2.6.0",
     "r.js": "~2.1.13",
     "normalize-css": "~3.0.0",
-    "font-awesome": "~4.0.3"
+    "font-awesome": "~4.1.0"
   },
   "resolutions": {
     "jquery": "2.1.1"
