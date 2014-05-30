@@ -70,7 +70,7 @@ var config = {
         "moment": "/components/moment/moment",
         "chai": "/components/chai/chai",
         "chai-jquery": "/components/chai-jquery/chai-jquery",
-        "socketio": "/components/socket.io-client/dist/socket.io"
+        "socketio": "/components/socket.io-client/socket.io"
     },
     modules: [
         {
