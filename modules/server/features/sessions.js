@@ -29,26 +29,23 @@
      */
     var deps = [
         'connect-mongo',
-        'express'
+        'cookie-parser',
+        'express',
+        'express-session'
     ];
 
-    define(deps, function(connectMongo, express) {
-        var MongoStore = connectMongo(express);
+    define(deps, function(connectMongo, cookieParser, express, session) {
+        var MongoStore = connectMongo(session);
 
         function FeatureSessions(server) {
-            server.app.cookieParser = express.cookieParser(server.config.server.session.secret);
-            server.app.use(server.app.cookieParser);
-
-            server.app.sessionStore = new MongoStore({ // jshint ignore:line
-                url: server.config.mongo.uri,
-                collection: 'Session',
-                auto_reconnect: true,
-                stringify: false
-            });
-
-            server.app.use(express.session({
+            server.app.use(session({
                 secret: server.config.server.session.secret,
-                store: server.app.sessionStore
+                saveUninitialized: true,
+                resave: true,
+                store: new MongoStore({
+                    url: server.config.mongo.uri,
+                    collection: 'Session'
+                })
             }));
         }
 

@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "deferred": "0.7.1",
-    "express": "~3.4.8",
+    "express": "~4.9.5",
     "express3-handlebars": "0.5.0",
     "handlebars": "~1.3.0",
     "mongodb": "~1.4.10",
@@ -43,7 +43,11 @@
     "dependable": "git://github.com/korczis/dependable.git",
     "solr-client": "~0.2.9",
     "winston": "~0.7.3",
-    "coffee-script": "~1.8.0"
+    "coffee-script": "~1.8.0",
+    "body-parser": "^1.9.0",
+    "method-override": "^2.2.0",
+    "cookie-parser": "^1.3.3",
+    "express-session": "^1.8.2"
   },
   "devDependencies": {
     "mocha": "~1.21.4",

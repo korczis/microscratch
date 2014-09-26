@@ -30,15 +30,17 @@
     var deps = [
         '../core',
         '../utils',
+        'body-parser',
         'deferred',
         'express',
         'fs',
         'http',
+        'method-override',
         'path',
         'util'
     ];
 
-    define(deps, function(Core, Utils, deferred, express, fs, http, path, util) {
+    define(deps, function(Core, Utils, bodyParser, deferred, express, fs, http, methodOverride, path, util) {
         var exports = module.exports = function ServerModule(resolver) {
             ServerModule.super_.call(this, resolver);
 
@@ -139,8 +141,20 @@
             // Initialize views
             this.initFeature('./features/views');
 
-            this.app.use(express.bodyParser());
-            this.app.use(express.methodOverride());
+            // parse application/x-www-form-urlencoded
+            this.app.use(bodyParser.urlencoded({ extended: false }))
+
+            // parse application/json
+            this.app.use(bodyParser.json())
+
+            this.app.use(methodOverride(function(req, res){
+                if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+                    // look in urlencoded POST bodies and delete it
+                    var method = req.body._method
+                    delete req.body._method
+                    return method
+                }
+            }));
 
             // Initialize router
             // TODO: Split into constructor and init!
