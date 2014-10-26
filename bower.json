@@ -25,7 +25,7 @@
     "socket.io-client": "1.1.0",
     "requirejs": "2.1.14",
     "mocha": "1.21.4",
-    "chai": "1.9.1",
+    "chai": "1.9.2",
     "chai-jquery": "1.2.2",
     "moment": "2.8.3",
     "r.js": "~2.1.14",
