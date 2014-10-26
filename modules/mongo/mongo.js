@@ -107,7 +107,7 @@
 
             mongoClient.connect(this.config.mongo.uri, function (err, db) {
                 if (err) {
-                    throw new Error("Cannot connect to DB '" + self.config.mongo.uri + "'");
+                    throw new Error("Cannot connect to DB '" + self.config.mongo.uri + "', reason: " + err.message);
                 }
 
                 if (self.config.verbose) {
