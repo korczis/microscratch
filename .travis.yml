@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "0.10.24"
+services:
+  - mongodb
+before_install:
+  - "export NODE_ENV=test"
