@@ -1,0 +1,44 @@
+{
+  "name": "lethe.it",
+  "version": "0.0.1",
+  "description": "Lethe Web Application - see lethe.it for more details",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/korczis/lethe.it.git"
+  },
+  "author": "korczis@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/korczis/lethe.it/issues"
+  },
+  "homepage": "https://github.com/korczis/lethe.it",
+  "dependencies": {
+    "cheerio": "^0.17.0",
+    "node.extend": "^1.0.10",
+    "deferred": "^0.7.1",
+    "request": "^2.34.0",
+    "nano": "^5.7.1",
+    "amdefine": "^0.1.0",
+    "minimist": "0.2.0",
+    "winston": "^0.7.3",
+    "faye": "^1.0.1",
+    "moment": "^2.6.0",
+    "deepmerge": "^0.2.7",
+    "fb": "^0.7.0",
+    "forever": "^0.13.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.18.2",
+    "chai": "^1.9.1",
+    "istanbul": "^0.2.6",
+    "coveralls": "^2.10.0",
+    "grunt": "^0.4.4",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-jsdoc": "^0.5.4",
+    "grunt-mocha-test": "^0.10.2"
+  }
+}
