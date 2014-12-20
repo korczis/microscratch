@@ -1,0 +1,19 @@
+{
+  "name": "lethe.it",
+  "version": "0.0.1",
+  "homepage": "https://github.com/korczis/lethe.it",
+  "authors": [
+    "korczis <korczis@gmail.com>"
+  ],
+  "description": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}
