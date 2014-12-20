@@ -4,7 +4,7 @@
   "description": "Lethe Web Application - see lethe.it for more details",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "exit 0"
   },
   "repository": {
     "type": "git",
