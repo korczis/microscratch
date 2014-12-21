@@ -114,11 +114,13 @@
 
 <div class="main-container">
     <div class="main wrapper clearfix">
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
+        <div id="fb-root">
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
 
-        <div id="status">
-            
+            <div id="status">
+        </div>
+
         <article>
             <header>
                 <h1>article header h1</h1>
