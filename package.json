@@ -46,7 +46,8 @@
     "cookie-signature": "^1.0.5",
     "utils-merge": "^1.0.0",
     "facebook-session-express": "0.0.62",
-    "connect-auth": "^0.6.1"
+    "connect-auth": "^0.6.1",
+    "connect-couchdb": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "^1.18.2",
