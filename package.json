@@ -44,7 +44,8 @@
     "uid-safe": "^1.0.1",
     "on-headers": "^1.0.0",
     "cookie-signature": "^1.0.5",
-    "utils-merge": "^1.0.0"
+    "utils-merge": "^1.0.0",
+    "facebook-session-express": "0.0.62"
   },
   "devDependencies": {
     "mocha": "^1.18.2",
