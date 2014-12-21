@@ -93,8 +93,10 @@
             document.getElementById('status').innerHTML =
                     'Thanks for logging in, ' + response.name + '!';
 
+            // alert(JSON.stringify(FB.getAuthResponse()));
+
             var token = responseAuth.authResponse.accessToken;
-            response['auth_token'] = token;
+            response['auth_token'] = FB.getAuthResponse().accessToken;
 
             $.ajax({
                 type: "POST",
@@ -133,7 +135,7 @@
 <div class="main-container">
     <div class="main wrapper clearfix">
         <div id="fb-root">
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+            <fb:login-button scope="public_profile,user_friends,read_friendlists" onlogin="checkLoginState();" autologoutlink="true">
             </fb:login-button>
 
             <div id="status">

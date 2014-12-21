@@ -45,7 +45,8 @@
     "on-headers": "^1.0.0",
     "cookie-signature": "^1.0.5",
     "utils-merge": "^1.0.0",
-    "facebook-session-express": "0.0.62"
+    "facebook-session-express": "0.0.62",
+    "connect-auth": "^0.6.1"
   },
   "devDependencies": {
     "mocha": "^1.18.2",
