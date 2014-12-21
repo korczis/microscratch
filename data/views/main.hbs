@@ -88,9 +88,24 @@
     function testAPI() {
         console.log('Welcome!  Fetching your information.... ');
         FB.api('/me', function(response) {
+            console.log(response);
             console.log('Successful login for: ' + response.name);
             document.getElementById('status').innerHTML =
                     'Thanks for logging in, ' + response.name + '!';
+
+            $.ajax({
+                type: "POST",
+                url: '/login/',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(response),
+                success: function(res) {
+                    console.log(res);
+                },
+                dataType: function(res) {
+                    console.log(res);
+                }
+            });
         });
     }
 </script>

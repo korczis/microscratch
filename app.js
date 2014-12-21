@@ -36,9 +36,6 @@
 
         var app = new Lethe.App();
         app.run();
-
-        var web = new Lethe.Web();
-        web.run();
     });
 
 }());
