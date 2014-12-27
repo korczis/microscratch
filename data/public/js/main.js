@@ -1,96 +1,86 @@
-// This is called with the results from from FB.getLoginStatus().
-function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-        // Logged into your app and Facebook.
-        testAPI(response);
-    } else if (response.status === 'not_authorized') {
-        // The person is logged into Facebook, but not your app.
-        document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-        // The person is not logged into Facebook, so we're not sure if
-        // they are logged into this app or not.
-        document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-}
+/*
+ Copyright, 2013, by Tomas Korcak. <korczis@gmail.com>
 
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
-function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-    });
-}
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the 'Software'), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
 
-window.fbAsyncInit = function() {
-    FB.init({
-        appId      : '778608158855551',
-        cookie     : true,  // enable cookies to allow the server to access the session
-        xfbml      : true,
-        version    : 'v2.1'
-    });
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
 
-    // Now that we've initialized the JavaScript SDK, we call
-    // FB.getLoginStatus().  This function gets the state of the
-    // person visiting this page and can return one of three states to
-    // the callback you provide.  They can be:
-    //
-    // 1. Logged into your app ('connected')
-    // 2. Logged into Facebook, but not your app ('not_authorized')
-    // 3. Not logged into Facebook and can't tell if they are logged into
-    //    your app or not.
-    //
-    // These three cases are handled in the callback function.
+ THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+ */
 
-    FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-    });
-};
+(function (requirejs, require, define) {
+    'use strict';
 
-// Load the SDK asynchronously
-(function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+    var config = {
+        // By default load any module IDs from js/lib
+        // baseUrl: 'js/lib',
 
-// Here we run a very simple test of the Graph API after login is
-// successful.  See statusChangeCallback() for when this call is made.
-function testAPI(responseAuth) {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-        console.log(response);
-        console.log('Successful login for: ' + response.name);
-        document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
+        // except, if the module ID starts with 'app',
+        // load it from the js/app directory. paths
+        // config is relative to the baseUrl, and
+        // never includes a '.js' extension since
+        // the paths config could be for a directory.
+        // paths: {
+        //     app: '../app'
+        // }
 
-        // alert(JSON.stringify(FB.getAuthResponse()));
 
-        var token = responseAuth.authResponse.accessToken;
-        response['auth_token'] = FB.getAuthResponse().accessToken;
+        baseUrl: '/app',
 
-        $.ajax({
-            type: "POST",
-            url: '/login/',
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(response),
-            success: function(res) {
-                console.log(res);
+        paths: {
+            'bootstrap': '/components/bootstrap/dist/js/bootstrap',
+            'handlebars': '/components/handlebars/handlebars',
+            'ember': '/components/ember/ember.debug',
+            'ember-data': '/components/ember-data/ember-data',
+            'jquery': '/components/jquery/dist/jquery',
+            'templates': '/assets/templates'
+        },
+
+        shim: {
+            bootstrap: {
+                deps: ['$']
             },
-            dataType: function(res) {
-                console.log(res);
+            ember: {
+                deps: ['jquery', 'handlebars'],
+                exports: 'Ember'
+            },
+            'ember-data': {
+                deps: ['ember'],
+                exports: 'DS'
+            },
+            'google-analytics':  {
+                exports: 'ga'
+            },
+            handlebars: {
+                deps: ['jquery'],
+                exports: 'Handlebars'
+            },
+            jquery: {
+                deps: [],
+                exports: '$'
             }
-        });
+        },
+        config: {
+        }
+    };
+
+    requirejs.config(config);
+    require.config(config);
+
+    // Start the main app logic.
+    requirejs(['app'], function (App) {
+        // App.initialize();
     });
-}
+})(requirejs, require, define);
