@@ -68,12 +68,11 @@
     "gulp-watch": "^3.0.0",
     "gulp-handlebars": "^3.0.1",
     "gulp-wrap": "^0.5.0",
-    "gulp-declare": "^0.3.0",
-    "gulp-define-module": "^0.1.1",
     "gulp-wrap-amd": "^0.4.0",
     "gulp-hb": "^0.2.0",
     "gulp-front-matter": "^1.1.1",
-    "gulp-ember-templates": "^0.5.2",
-    "ember-handlebars": "^1.2.0"
+    "ember-handlebars": "^1.2.0",
+    "handlebars": "^2.0.0",
+    "gulp-debug": "^1.0.1"
   }
 }

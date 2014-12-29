@@ -2,7 +2,7 @@ var gulp = require('gulp');
 
 // Include Our Plugins
 var bower = require('gulp-bower');
-var declare = require('gulp-declare');
+var debug = require('gulp-debug');
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
@@ -13,8 +13,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var cssshrink = require('gulp-cssshrink');
 var requireConvert = require("gulp-require-convert");
 var watch = require('gulp-watch');
-var emberTemplates = require('gulp-ember-templates');
 var wrap = require('gulp-wrap');
+var wrapAmd = require('gulp-wrap-amd');
 
 // Lint Task
 gulp.task('lint', ['bower'], function () {
@@ -47,7 +47,7 @@ gulp.task('sass', function () {
 
 // Scripts (Application) Task
 gulp.task('scripts-app', function () {
-    var src = "./data/public/app/**/*.js"
+    var src = "./data/public/app/**/*.js";
     return gulp.src(src)
         .pipe(watch(src))
         .pipe(requireConvert())
@@ -56,34 +56,16 @@ gulp.task('scripts-app', function () {
 });
 
 // Ember Templates Task
-//gulp.task('templates', ['bower'], function () {
-//    var src = ['./data/public/app/**/*.hbs'];
-//    return gulp.src(src)
-//        .pipe(emberTemplates({
-//            moduleName: '',
-//            type: 'browser',
-//            name: function (name, done) {
-//                name = name.replace('templates/', '');
-//                done(null, name);
-//            }
-//        }))
-//        .pipe(wrap({
-//            deps: ['ember']
-//        }))
-//        .pipe(concat('templates.js'))
-//        .pipe(gulp.dest('./data/public/assets/'));
-//});
-
 gulp.task('templates', ['bower'], function () {
     var src = ['./data/public/app/**/*.hbs'];
-    gulp.src(src)
+    return gulp.src(src)
+        //.pipe(debug())
         .pipe(handlebars({
             handlebars: require('handlebars')
         }))
-        .pipe(wrap('Handlebars.template(<%= contents %>)'))
-        .pipe(declare({
-            namespace: 'MyApp.templates',
-            noRedeclare: true, // Avoid duplicate declarations
+        .pipe(wrap("Ember.TEMPLATES['<%= data.templateName %>'] = Ember.Handlebars.template(<%= data.contents %>)", { templateName: 'application'}, { variable: 'data' }))
+        .pipe(wrapAmd({
+            deps: ['ember']
         }))
         .pipe(concat('templates.js'))
         .pipe(gulp.dest('./data/public/assets/'));
