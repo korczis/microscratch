@@ -59,15 +59,16 @@ gulp.task('scripts-app', function () {
 gulp.task('templates', ['bower'], function () {
     var src = ['./data/public/app/**/*.hbs'];
     return gulp.src(src)
-        //.pipe(debug())
+        .pipe(debug())
         .pipe(handlebars({
             handlebars: require('handlebars')
         }))
-        .pipe(wrap("Ember.TEMPLATES['<%= data.templateName %>'] = Ember.Handlebars.template(<%= data.contents %>)", { templateName: 'application'}, { variable: 'data' }))
-        .pipe(wrapAmd({
-            deps: ['ember']
-        }))
+        .pipe(wrap("Ember.TEMPLATES['<%= data.file.path.replace(data.file.base, \'\').replace('.js', \'\') %>'] = Ember.Handlebars.template(<%= data.contents %>)", {}, { variable: 'data' }))
         .pipe(concat('templates.js'))
+        .pipe(wrapAmd({
+            deps: ['ember'],
+            exports: 'Ember.TEMPLATES'
+        }))
         .pipe(gulp.dest('./data/public/assets/'));
 });
 
