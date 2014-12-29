@@ -48,7 +48,14 @@
         'gulp-wrap-amd'
     ];
 
-    var sources = {
+    var dirs = [
+
+    ];
+
+    var files = {
+        assets: [
+            './data/public/assets/*.*'
+        ],
         sass: [
             './data/public/css/*.scss'
         ],
@@ -82,9 +89,17 @@
                            watch,
                            wrap,
                            wrapAmd) {
+
+        // Variable used for specifying module dependencies
+        var deps = [];
+
+
         // Lint Task
-        gulp.task('lint', ['bower'], function () {
-            var src = sources.scripts.app;
+        deps = [
+            'bower'
+        ];
+        gulp.task('lint', deps, function () {
+            var src = files.scripts.app;
             return gulp.src(src)
                 .pipe(jshint())
                 .pipe(jshint.reporter('default'));
@@ -100,14 +115,18 @@
 
         // Clean Task
         gulp.task('clean', function() {
-            var src = ['./data/public/assets/*.*'];
+            var src = files.assets;
             return gulp.src(src)
                 .pipe(clean());
         });
 
         // Sass Task
-        gulp.task('sass', ['clean'], function () {
-            var src = sources.sass;
+        deps = [
+            'bower',
+            'clean'
+        ];
+        gulp.task('sass', deps, function () {
+            var src = files.sass;
             return gulp.src(src)
                 .pipe(sourcemaps.init())
                 .pipe(sass())
@@ -118,21 +137,48 @@
         });
 
         // Scripts (Application) Task
-        gulp.task('scripts.app', ['clean'], function () {
-            var src = sources.scripts.app;
+        deps = [
+            'scripts.core'
+        ];
+        gulp.task('scripts.app', deps, function () {
+            var src = files.scripts.app;
             return gulp.src(src)
                 .pipe(requireConvert())
                 .pipe(rename('bundle.js'))
                 .pipe(gulp.dest(destDir));
         });
 
+        // Scripts (Bundle) Task
+        deps = [
+            'scripts.app'
+        ];
+        gulp.task('scripts.bundle', deps, function () {
+            var src = [];
+            return gulp.src(src);
+        });
+
+        // Script (Core) Task
+        deps = [
+            'bower',
+            'clean'
+        ];
+        gulp.task('scripts.core', deps, function () {
+            var src = [];
+            return gulp.src(src);
+        });
+
         // Ember Templates Task
-        gulp.task('templates', ['bower', 'clean'], function () {
-            var src = sources.templates;
+        deps = [
+            'bower',
+            'clean'
+        ];
+        gulp.task('templates', deps, function () {
+            var src = files.templates;
             return gulp.src(src)
                 //.pipe(debug())
                 .pipe(handlebars({
-                    handlebars: require('ember-handlebars')
+                    handlebars: require('ember-handlebars') // Ember <= 1.8.1 && Handlebars <= 1.3.0
+                    // handlebars: require('handlebars') // Ember >= 1.9 && Handlebars >= 2.0
                 }))
                 .pipe(wrap({
                         src: './data/public/handlebars/template.hbs'
@@ -158,7 +204,7 @@
         gulp.task('build', [
             'clean',
             'sass',
-            'scripts.app',
+            'scripts.bundle',
             'lint',
             'templates'
         ]);
