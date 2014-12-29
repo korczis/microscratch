@@ -36,7 +36,6 @@ gulp.task('bower', function () {
 gulp.task('sass', function () {
     var src = './data/public/css/*.scss';
     return gulp.src(src)
-        .pipe(watch(src))
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(cssshrink())
@@ -49,7 +48,6 @@ gulp.task('sass', function () {
 gulp.task('scripts-app', function () {
     var src = "./data/public/app/**/*.js";
     return gulp.src(src)
-        .pipe(watch(src))
         .pipe(requireConvert())
         .pipe(rename('bundle.js'))
         .pipe(gulp.dest("./data/public/assets"));
@@ -72,4 +70,6 @@ gulp.task('templates', ['bower'], function () {
         .pipe(gulp.dest('./data/public/assets/'));
 });
 
-gulp.task('default', ['bower', 'sass', 'scripts-app', 'lint', 'templates']);
+gulp.task('build', ['sass', 'scripts-app', 'lint', 'templates']);
+
+gulp.task('default', ['bower', 'build']);
