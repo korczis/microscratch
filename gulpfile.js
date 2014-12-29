@@ -130,7 +130,6 @@
                         variable: 'data'
                     }
                 ))
-                //.pipe(wrap({ src: 'path/to/template.txt'}))
                 .pipe(concat('templates.js'))
                 .pipe(wrapAmd({
                     deps: [
