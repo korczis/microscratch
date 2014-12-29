@@ -59,7 +59,7 @@ gulp.task('scripts-app', function () {
 gulp.task('templates', ['bower'], function () {
     var src = ['./data/public/app/**/*.hbs'];
     return gulp.src(src)
-        .pipe(debug())
+        //.pipe(debug())
         .pipe(handlebars({
             handlebars: require('ember-handlebars')
         }))
