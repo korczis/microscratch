@@ -61,7 +61,7 @@ gulp.task('templates', ['bower'], function () {
     return gulp.src(src)
         .pipe(debug())
         .pipe(handlebars({
-            handlebars: require('handlebars')
+            handlebars: require('ember-handlebars')
         }))
         .pipe(wrap("Ember.TEMPLATES['<%= data.file.path.replace(data.file.base, \'\').replace('.js', \'\') %>'] = Ember.Handlebars.template(<%= data.contents %>)", {}, { variable: 'data' }))
         .pipe(concat('templates.js'))

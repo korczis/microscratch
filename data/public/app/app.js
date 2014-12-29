@@ -22,7 +22,7 @@
 
     var deps = [
         'ember',
-        // 'templates'
+        'templates'
     ];
 
     define(deps, function (Ember) {

@@ -42,7 +42,7 @@
         paths: {
             'bootstrap': '/components/bootstrap/dist/js/bootstrap',
             'handlebars': '/components/handlebars/handlebars',
-            'ember': '/components/ember/ember.debug',
+            'ember': '/components/ember/ember',
             'ember-data': '/components/ember-data/ember-data',
             'jquery': '/components/jquery/dist/jquery',
             'templates': '/assets/templates'
