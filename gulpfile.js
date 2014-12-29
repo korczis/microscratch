@@ -48,12 +48,16 @@
     ];
 
     var sources = {
-        app: [
-            './data/public/app/**/*.js'
-        ],
         sass: [
             './data/public/css/*.scss'
         ],
+
+        scripts: {
+            app: [
+                './data/public/app/**/*.js'
+            ]
+        },
+
         templates: [
             './data/public/app/**/*.hbs'
         ]
@@ -76,7 +80,7 @@
                            wrapAmd) {
         // Lint Task
         gulp.task('lint', ['bower'], function () {
-            var src = sources.app;
+            var src = sources.scripts.app;
             return gulp.src(src)
                 .pipe(jshint())
                 .pipe(jshint.reporter('default'));
@@ -87,7 +91,7 @@
             return bower({
                 cwd: './',
                 debugging: true
-            }); // .pipe(gulp.dest('data/public/assets'));
+            });
         });
 
         // Sass Task
@@ -104,7 +108,7 @@
 
         // Scripts (Application) Task
         gulp.task('scripts-app', function () {
-            var src = sources.app;
+            var src = sources.scripts.app;
             return gulp.src(src)
                 .pipe(requireConvert())
                 .pipe(rename('bundle.js'))
@@ -119,7 +123,14 @@
                 .pipe(handlebars({
                     handlebars: require('ember-handlebars')
                 }))
-                .pipe(wrap("Ember.TEMPLATES['<%= data.file.path.replace(data.file.base, \'\').replace('.js', \'\') %>'] = Ember.Handlebars.template(<%= data.contents %>)", {}, {variable: 'data'}))
+                .pipe(wrap({
+                    src: './data/public/handlebars/template.hbs'},
+                    {},
+                    {
+                        variable: 'data'
+                    }
+                ))
+                //.pipe(wrap({ src: 'path/to/template.txt'}))
                 .pipe(concat('templates.js'))
                 .pipe(wrapAmd({
                     deps: [
@@ -127,6 +138,7 @@
                     ],
                     exports: 'Ember.TEMPLATES'
                 }))
+                //.pipe(uglify())
                 .pipe(gulp.dest('./data/public/assets/'));
         });
 
