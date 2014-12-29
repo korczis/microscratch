@@ -33,6 +33,7 @@
         'gulp',
         'gulp-bower',
         'gulp-debug',
+        'gulp-clean',
         'gulp-concat',
         'gulp-cssshrink',
         'gulp-handlebars',
@@ -63,9 +64,12 @@
         ]
     };
 
+    var destDir = './data/public/assets';
+
     define(deps, function (gulp,
                            bower,
                            debug,
+                           clean,
                            concat,
                            cssshrink,
                            handlebars,
@@ -94,8 +98,15 @@
             });
         });
 
+        // Clean Task
+        gulp.task('clean', function() {
+            var src = ['./data/public/assets/*.*'];
+            return gulp.src(src)
+                .pipe(clean());
+        });
+
         // Sass Task
-        gulp.task('sass', function () {
+        gulp.task('sass', ['clean'], function () {
             var src = sources.sass;
             return gulp.src(src)
                 .pipe(sourcemaps.init())
@@ -103,20 +114,20 @@
                 .pipe(cssshrink())
                 .pipe(sourcemaps.write())
                 .pipe(rename('bundle.css'))
-                .pipe(gulp.dest('./data/public/assets'));
+                .pipe(gulp.dest(destDir));
         });
 
         // Scripts (Application) Task
-        gulp.task('scripts-app', function () {
+        gulp.task('scripts.app', ['clean'], function () {
             var src = sources.scripts.app;
             return gulp.src(src)
                 .pipe(requireConvert())
                 .pipe(rename('bundle.js'))
-                .pipe(gulp.dest("./data/public/assets"));
+                .pipe(gulp.dest(destDir));
         });
 
         // Ember Templates Task
-        gulp.task('templates', ['bower'], function () {
+        gulp.task('templates', ['bower', 'clean'], function () {
             var src = sources.templates;
             return gulp.src(src)
                 //.pipe(debug())
@@ -124,7 +135,9 @@
                     handlebars: require('ember-handlebars')
                 }))
                 .pipe(wrap({
-                    src: './data/public/handlebars/template.hbs'},
+                        src: './data/public/handlebars/template.hbs'
+                    },
+                    // Passed variables
                     {},
                     {
                         variable: 'data'
@@ -138,13 +151,14 @@
                     exports: 'Ember.TEMPLATES'
                 }))
                 //.pipe(uglify())
-                .pipe(gulp.dest('./data/public/assets/'));
+                .pipe(gulp.dest(destDir));
         });
 
         // Build Task
         gulp.task('build', [
+            'clean',
             'sass',
-            'scripts-app',
+            'scripts.app',
             'lint',
             'templates'
         ]);
