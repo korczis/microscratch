@@ -2,6 +2,10 @@
 
 lethe.it - your personal smart links archive, organizer, classifier and much more
 
+## Online Application
+
+To feel the experience visit [https://lethe.it](https://lethe.it)
+
 ## Status
 
 [![Build Status](https://travis-ci.org/korczis/lethe.it.svg?branch=master)](https://travis-ci.org/korczis/lethe.it)
