@@ -9,9 +9,18 @@ lethe.it - your personal smart links archive, organizer, classifier and much mor
 ## Getting Started
 
 ```
+# Clone repository
 git clone https://github.com/korczis/lethe.it.git
+
+# Enter directory with cloned sources
 cd lethe.it
+
+# Install required node packages
 npm install
+
+# Run build pipeline
 gulp
+
+# Run node application server
 node app.js
 ```
