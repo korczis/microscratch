@@ -21,30 +21,15 @@
 (function (global) {
 
     var deps = [
-        // Core
         'app',
-        'router',
-
-        // REST API Adapter
-        'api/adapter',
-        'api/initializer',
-        'api/store',
-
-        // Models
-        'models/user',
-
-        // Routes
-        'routes/applicationController',
-        'routes/applicationRoute',
-
-        'routes/indexController',
-        'routes/indexRoute',
-
-        'routes/login/loginRoute',
-        'routes/login/loginView'
+        'ember-data'
     ];
 
-    define(deps, function () {
-        return deps;
+    define(deps, function (App, DS) {
+        App.ApiAdapter = DS.RESTAdapter.extend({
+            // namespace: 'api/1',
+        });
+
+        return App.ApiAdapter;
     });
 })(this);

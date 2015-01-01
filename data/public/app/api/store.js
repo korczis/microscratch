@@ -22,9 +22,16 @@
 
     var deps = [
         'app',
+        'api/adapter',
         'ember-data'
     ];
 
-    define(deps, function (App, DS) {
+    define(deps, function (App, Adapter, DS) {
+        App.ApplicationStore = DS.Store.extend({
+            // TODO: Customize here
+            adapter: App.ApiAdapter
+        });
+
+        return App.ApplicationStore;
     });
 })(this);

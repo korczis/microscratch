@@ -21,30 +21,21 @@
 (function (global) {
 
     var deps = [
-        // Core
         'app',
-        'router',
-
-        // REST API Adapter
         'api/adapter',
-        'api/initializer',
-        'api/store',
-
-        // Models
-        'models/user',
-
-        // Routes
-        'routes/applicationController',
-        'routes/applicationRoute',
-
-        'routes/indexController',
-        'routes/indexRoute',
-
-        'routes/login/loginRoute',
-        'routes/login/loginView'
+        'ember',
+        'ember-data'
     ];
 
-    define(deps, function () {
-        return deps;
+    define(deps, function (App, ApiAdapter, Ember, DS) {
+        Ember.Application.initializer({
+            name: 'api-adapter',
+
+            initialize: function(container, application) {
+                application.register('api-adapter:main', App.ApiAdapter);
+            }
+        });
+
+        return App;
     });
 })(this);

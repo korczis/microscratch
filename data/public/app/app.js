@@ -23,30 +23,13 @@
     var deps = [
         'ember',
         'ember-data',
-        'templates'
+        'templates',
     ];
 
-    define(deps, function (Ember, DS) {
+    define(deps, function (Ember, DS, config) {
         var App = window.App = Ember.Application.create({
             LOG_TRANSITIONS: true,         // basic logging of successful transitions
             LOG_TRANSITIONS_INTERNAL: true // detailed logging of all routing steps
-        });
-
-        App.ApiAdapter = DS.RESTAdapter.extend({
-            // namespace: 'api/1',
-        });
-
-        App.ApplicationStore = DS.Store.extend({
-            // TODO: Customize here
-            adapter: App.ApiAdapter
-        });
-
-        Ember.Application.initializer({
-            name: 'api-adapter',
-
-            initialize: function(container, application) {
-                application.register('api-adapter:main', App.ApiAdapter);
-            }
         });
 
         return App;
