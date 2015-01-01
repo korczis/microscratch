@@ -21,36 +21,17 @@
 (function (global) {
 
     var deps = [
-        // Core
-        'app',
-        'router',
-
-        // REST API Adapter
-        'api/adapter',
-        'api/initializer',
-        'api/store',
-
-        // Ember Extensions
-        'extensions/linkView',
-        
-        // Socket.io
-        'socket/initializer',
-
-        // Models
-        'models/user',
-
-        // Routes
-        'routes/applicationController',
-        'routes/applicationRoute',
-
-        'routes/indexController',
-        'routes/indexRoute',
-
-        'routes/login/loginRoute',
-        'routes/login/loginView'
+        'ember'
     ];
 
-    define(deps, function () {
-        return deps;
+    define(deps, function (Ember) {
+        Ember.LinkView.reopen({
+            attributeBindings: [
+                'data-toggle',
+                'role'
+            ]
+        });
+
+        return Ember.LinkView;
     });
 })(this);
