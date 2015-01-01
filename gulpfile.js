@@ -36,6 +36,7 @@
         'gulp-clean',
         'gulp-concat',
         'gulp-cssshrink',
+        'gulp-filesize',
         'gulp-handlebars',
         'gulp-jshint',
         'gulp-livereload',
@@ -66,6 +67,10 @@
 
         templates: [
             './data/public/app/**/*.hbs'
+        ],
+
+        views: [
+            './data/views/**/*.hbs'
         ]
     };
 
@@ -77,6 +82,7 @@
                            clean,
                            concat,
                            cssshrink,
+                           filesize,
                            handlebars,
                            jshint,
                            livereload,
@@ -197,6 +203,7 @@
                     exports: 'Ember.TEMPLATES'
                 }))
                 .pipe(uglify())
+                .pipe(filesize())
                 .pipe(gulp.dest(destDir))
                 .pipe(livereload());
         });
@@ -207,7 +214,8 @@
             gulp.watch([
                 files.sass[0],
                 files.scripts.app[0],
-                files.templates[0]
+                files.templates[0],
+                files.views[0]
             ], [
                 'build'
             ]);
