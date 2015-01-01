@@ -38,6 +38,7 @@
         'gulp-cssshrink',
         'gulp-handlebars',
         'gulp-jshint',
+        'gulp-livereload',
         'gulp-rename',
         'gulp-require-convert',
         'gulp-sass',
@@ -78,6 +79,7 @@
                            cssshrink,
                            handlebars,
                            jshint,
+                           livereload,
                            rename,
                            requireConvert,
                            sass,
@@ -195,10 +197,13 @@
                     exports: 'Ember.TEMPLATES'
                 }))
                 .pipe(uglify())
-                .pipe(gulp.dest(destDir));
+                .pipe(gulp.dest(destDir))
+                .pipe(livereload());
         });
 
         gulp.task('watch', function () {
+            livereload.listen();
+
             gulp.watch([
                 files.sass[0],
                 files.scripts.app[0],
