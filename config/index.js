@@ -34,6 +34,7 @@
         var rootUrl = process.env.ROOT_URL | 'https://' + appName + '/';
 
         var config = {
+            appName: appName,
             rootUrl: rootUrl,
 
             server: {
