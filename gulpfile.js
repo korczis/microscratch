@@ -48,10 +48,6 @@
         'gulp-wrap-amd'
     ];
 
-    var dirs = [
-
-    ];
-
     var files = {
         assets: [
             './data/public/assets/*.*'
@@ -90,10 +86,6 @@
                            watch,
                            wrap,
                            wrapAmd) {
-
-        // Variable used for specifying module dependencies
-        var deps = [];
-
 
         // Lint Task
         deps = [
@@ -202,8 +194,18 @@
                     ],
                     exports: 'Ember.TEMPLATES'
                 }))
-                //.pipe(uglify())
+                .pipe(uglify())
                 .pipe(gulp.dest(destDir));
+        });
+
+        gulp.task('watch', function () {
+            gulp.watch([
+                files.sass[0],
+                files.scripts.app[0],
+                files.templates[0]
+            ], [
+                'build'
+            ]);
         });
 
         // Build Task
