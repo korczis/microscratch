@@ -32,7 +32,7 @@
 
         // Ember Extensions
         'extensions/linkView',
-        
+
         // Socket.io
         'socket/initializer',
 
