@@ -21,33 +21,19 @@
 (function (global) {
 
     var deps = [
-        // Core
         'app',
-        'router',
-
-        // REST API Adapter
-        'api/adapter',
-        'api/initializer',
-        'api/store',
-
-        // Socket.io
-        'socket/initializer',
-
-        // Models
-        'models/user',
-
-        // Routes
-        'routes/applicationController',
-        'routes/applicationRoute',
-
-        'routes/indexController',
-        'routes/indexRoute',
-
-        'routes/login/loginRoute',
-        'routes/login/loginView'
+        'socket.io'
     ];
 
-    define(deps, function () {
-        return deps;
+    define(deps, function (App, Socket) {
+        Ember.Application.initializer({
+            name: 'socket',
+
+            initialize: function(container, application) {
+                application.set('sockets', Socket());
+            }
+        });
+
+        return App;
     });
 })(this);

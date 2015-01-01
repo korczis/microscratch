@@ -45,7 +45,8 @@
             'ember': '/components/ember/ember',
             'ember-data': '/components/ember-data/ember-data',
             'jquery': '/components/jquery/dist/jquery',
-            'templates': '/assets/templates'
+            'templates': '/assets/templates',
+            'socket.io': '/assets/socket.io'
         },
 
         shim: {

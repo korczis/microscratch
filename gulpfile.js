@@ -168,6 +168,14 @@
             return gulp.src(src);
         });
 
+        gulp.task('scripts.socket.io', deps, function () {
+            var src = [
+                'node_modules/socket.io/node_modules/socket.io-client/socket.io.js'
+            ];
+            return gulp.src(src)
+                .pipe(gulp.dest(destDir))
+        });
+
         // Ember Templates Task
         deps = [
             'bower',
@@ -226,6 +234,7 @@
             'clean',
             'sass',
             'scripts.bundle',
+            'scripts.socket.io',
             'lint',
             'templates'
         ]);
