@@ -27,4 +27,8 @@ gulp
 
 # Run node application server
 node app.js
+
+# Optionally watch for changes, run automatic build and reload page in browser.
+# Live reload chrome extension is required for automatic page reload.
+gulp watch
 ```
