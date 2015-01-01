@@ -80,7 +80,7 @@
     require.config(config);
 
     // Start the main app logic.
-    requirejs(['app'], function (App) {
+    requirejs(['lib'], function (App) {
         // App.initialize();
     });
 })(requirejs, require, define);

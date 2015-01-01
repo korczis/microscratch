@@ -57,6 +57,7 @@
             './data/public/assets/*.*'
         ],
         sass: [
+            // './data/public/css/normalize.css',
             './data/public/css/*.scss'
         ],
 
@@ -174,6 +175,9 @@
         ];
         gulp.task('templates', deps, function () {
             var src = files.templates;
+            var getFilename = function (base, path) {
+
+            };
             return gulp.src(src)
                 //.pipe(debug())
                 .pipe(handlebars({
@@ -184,7 +188,9 @@
                         src: './data/public/handlebars/template.hbs'
                     },
                     // Passed variables
-                    {},
+                    {
+                        getFilename: getFilename
+                    },
                     {
                         variable: 'data'
                     }
