@@ -30,9 +30,11 @@
             model: function () {
                 return this.store.find('user', 'current');
             },
+
             beforeModel: function() {
                 // this.transitionTo('login');
             },
+
             // The code below is the default behavior, so if this is all you
             // need, you do not need to provide a setupController implementation
             // at all.
