@@ -33,7 +33,7 @@
         });
 
         App.ApiAdapter = DS.RESTAdapter.extend({
-            // namespace: 'api/1'
+            // namespace: 'api/1',
         });
 
         App.ApplicationStore = DS.Store.extend({

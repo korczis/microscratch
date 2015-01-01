@@ -30,21 +30,39 @@
     var deps = [];
 
     define(deps, function() {
-        var rootUrl = process.env.ROOT_URL | 'https://lethe.it/';
+        var appName = 'lethe.it';
+        var rootUrl = process.env.ROOT_URL | 'https://' + appName + '/';
 
         var config = {
             rootUrl: rootUrl,
 
-            facebook: {
-                appId:        process.env.FACEBOOK_APPID || '778608158855551',
-                appSecret:    process.env.FACEBOOK_APPSECRET || '03fa4c0d237ceb18908a6e6226d7a1dd',
-                appNamespace: process.env.FACEBOOK_APPNAMESPACE || 'lethe-it',
-                redirectUri:  process.env.FACEBOOK_REDIRECTURI || rootUrl + 'login/callback'
+            server: {
+                auth: {
+                    facebook: {
+                        appId:        process.env.FACEBOOK_APPID || '778608158855551',
+                        appSecret:    process.env.FACEBOOK_APPSECRET || '03fa4c0d237ceb18908a6e6226d7a1dd',
+                        appNamespace: process.env.FACEBOOK_APPNAMESPACE || 'lethe-it',
+                        redirectUri:  process.env.FACEBOOK_REDIRECTURI || rootUrl + 'login/callback',
+                        scope:        'email'
+                    },
+
+                    twitter: {
+                        apiKey:    process.env.TWITTER_KEY || 'IsAyXNYEIQrqqXQdP5dksYdLS',
+                        apiSecret: process.env.TWITTER_SECRET || 'QKz3pqFceHRTyTKfPSoYRZd6QFWFGqo6M1X8z5grT1iZbdKa6z'
+                    }
+                },
+                session: {
+                    secret: 'secret',
+                    store: {
+                        name: 'lethe-it-sessions'
+                    }
+                }
             },
 
-            twitter: {
-                apiKey:    process.env.TWITTER_KEY || 'IsAyXNYEIQrqqXQdP5dksYdLS',
-                apiSecret: process.env.TWITTER_SECRET || 'QKz3pqFceHRTyTKfPSoYRZd6QFWFGqo6M1X8z5grT1iZbdKa6z'
+            couchdb: {
+                host: 'localhost',
+                username: 'lethe.it',
+                password: 'lethe.it'
             }
         };
 
